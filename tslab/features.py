@@ -260,6 +260,7 @@ def build_features(frame):
     # Positive = busier than usual, negative = quieter than usual.
     # Unusually heavy trading often comes with news.
     out["volume_rel_20d"] = np.log(volume / volume.rolling(20).mean())
+    out["volume_ratio_10_60"] = np.log(volume.rolling(10).mean() / volume.rolling(60).mean())
 
     # ----------------------------------------------------------------------
     # GROUP 5: OTHER MARKETS - "What is happening in the wider world?"
@@ -335,7 +336,7 @@ FEATURE_GROUPS = {
     "technical": ["rsi_14", "macd_hist", "bb_percent_b", "bb_width",
                   "dist_sma_20", "dist_sma_50", "dist_sma_200",
                   "gap_overnight", "move_intraday"],
-    "volume": ["volume_rel_20d"],
+        "volume": ["volume_rel_20d", "volume_ratio_10_60"],
     "other_markets": ["SP500_ret_1d", "SP500_ret_5d", "TECH_ret_1d", "TECH_ret_5d",
                       "GOLD_ret_1d", "GOLD_ret_5d", "BRENT_ret_1d", "BRENT_ret_5d",
                       "USD_ret_1d", "USD_ret_5d", "VIX_level", "VIX_change_1d",

@@ -44,9 +44,12 @@
 
 | **Details**                                                                                        | **Comment** |
 |:---------------------------------------------------------------------------------------------------|:------------|
-| **Student ID:**                                                                                    |             |
-| **Name:**                                                                                          |             |
-| **What part of the lab did you personally contribute to,** <br>**and what did you learn from it?** |             |
+| **Student ID:**                                                                                    |    168657         |
+| **Name:**                                                                                          |    Lisa Mburu         |
+| **What part of the lab did you personally contribute to,** <br>**and what did you learn from it?** | Multi-Horizon Forecasting & Baseline Exports (Notebook 7, Steps 1–6): Ran the multi-horizon forecasting pipeline on ExxonMobil (XOM) across 1-, 5-, 21-, and 63-day horizons using leak-free walk-forward splits (gap=horizon to prevent overlapping target label leakage). Added Diebold-Mariano tests against the naive baseline across horizons, analyzed forecast skill decay as horizon length increases and effective independent sample size shrinks, and documented how the 10–90% prediction interval widens over the 63-day path. Exported and verified data/forecast_basic.csv (63 future business days with date, forecast, lower, and upper on XOM price levels) and data/forecast_backtest.csv (achieving 75.1% 1-day empirical coverage against the 80.0% target) for downstream modeling and Power BI reporting. Prediction Interval Calibration & Volatility Regimes (Notebook 4, Step 10): Implemented walk-forward quantile regression (q = 0.10 and q = 0.90) on XOM returns (runtime: 37.6s), achieving 74.3% empirical coverage against the 80.0% nominal target (a -5.7 percentage point shortfall) with an average interval width of 0.0399 (3.99%). Splitting the test window by median VIX_level (2.9145) showed 75.1% coverage on calm days versus 73.6% coverage on stormy days, reflecting volatility clustering and sharper tail swings during high-volatility regimes.   |
+
+
+
 
 ## Scenario
 

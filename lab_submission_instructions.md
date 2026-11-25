@@ -4,7 +4,7 @@
 
 ## Student Details
 
-**Name of the team on GitHub Classroom:**
+**Name of the team on GitHub Classroom:** [TEAM NAME]
 
 **Team Member Contributions:**
 
@@ -50,6 +50,45 @@
 
 
 
+
+**Member 6**
+
+| **Details**                                                                                        | **Comment** |
+|:---------------------------------------------------------------------------------------------------|:------------|
+| **Student ID:**                                                                                    |             |
+| **Name:**                                                                                          |             |
+| **What part of the lab did you personally contribute to,** <br>**and what did you learn from it?** |             |
+
+**Member 7**
+
+| **Details**                                                                                        | **Comment** |
+|:---------------------------------------------------------------------------------------------------|:------------|
+| **Student ID:**                                                                                    |             |
+| **Name:**                                                                                          |             |
+| **What part of the lab did you personally contribute to,** <br>**and what did you learn from it?** |             |
+
+---
+
+## Our Stock, Data and Results
+
+| **Key**                    | **Value** |
+|:---------------------------|:----------|
+| **Stock:**                 | ExxonMobil (XOM) |
+| **Data:**                  | Daily prices from Yahoo Finance, 2 Jan 2015 to 9 Nov 2026 (`SNAPSHOT_END = "2026-11-10"`) |
+| **Date of download:**      | [MARIAM: the date you ran `download_data.py --target XOM`] |
+| **Power BI report:**       | `outputs/XOM_dashboard.pbix` |
+
+## Written Verdict
+
+**Does the model beat the naive forecast? No.** Over 1,781 test days (9 Oct 2019 to 9 Nov 2026), our best model, Ridge regression, missed the next day's closing price by $1.5806 on average (RMSE). The naive forecast "tomorrow equals today" missed by $1.5811. That gap is 0.03%. The Diebold-Mariano test gives p = 0.67, so Ridge is **not significantly** better than naive. ARMAX ($1.5920, p = 0.58) is not significantly different either. Gradient boosting ($1.5884, p = 0.036) is **significantly worse**. Ridge called the direction right on 52.2% of days, but XOM simply rose on 51.9% of them, so this is no real skill. Tuning chose a very strong penalty (alpha = 100,000), which shrinks Ridge's forecast almost to zero change, so it ends up behaving like the naive forecast. For daily returns of a large stock, this is the expected and honest result.
+
+**How we know the test was fair.** [VICTOR: paste your "How we kept the test honest" paragraph here, shortened to about 80 words. Draft from the notebooks for you to confirm: Every model was tested walk-forward. It trained on the first 1,000 days, forecast the next 63, then moved forward (29 folds), so it never saw the days it was scored on. Nothing was shuffled. Scalers and tuning used only training data, and Ridge was tuned on the first 1,000 days only. Market predictors were lagged one day. `check_no_lookahead` passed on all 48 features, including our added `volume_ratio_10_60`. When we planted a deliberately leaky feature, R² jumped from –0.05 to 0.80, and the check caught it.]
+
+**How much to trust the 63-day forecast.** The model puts XOM at $188.86 on 4 Feb 2027 (up 15% from $163.70), with an 80% range of $151.95 to $209.57. That range is $57.61 wide, about 35% of today's price. Treat the central line with caution: at the 63-day horizon the model's error ($13.08) was larger than naive's ($11.83), with R² of –0.26 and DM p = 0.11. Its expected rise is therefore not supported by evidence. The range is also too narrow. The next-day 80% range contained the actual price 75.1% of the time (73.6% on high-VIX days), and at 63 days only 59.0%. In practice the realistic range is wider than shown. A trading test agrees: buy and hold earned 17.2% a year, while trading long/short on gradient boosting (the better of the two back-tested models) earned 7.4% before costs and –4.3% after 10 bp costs. Ridge lost money even before costs. [STEPHANIE: one sentence on whether any neural network beat naive on XOM, with RMSE and DM p-value.]
+
+**For the client:** we cannot forecast XOM's daily moves better than "no change". The useful output is the range, which shows how far the price could move, and even that should be read as a minimum.
+
+---
 
 ## Scenario
 
@@ -181,7 +220,7 @@ For all three tiers, submit the link to a short video (not more than 4 minutes) 
 
 | **Key**                | **Value** |
 |:-----------------------|:----------|
-| **Link to the video:** |           |
+| **Link to the video:** | [VIDEO LINK: must open without a login] |
 
 ---
 

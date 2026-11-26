@@ -35,9 +35,13 @@
 
 | **Details**                                                                                        | **Comment** |
 |:---------------------------------------------------------------------------------------------------|:------------|
-| **Student ID:**                                                                                    |             |
-| **Name:**                                                                                          |             |
-| **What part of the lab did you personally contribute to,** <br>**and what did you learn from it?** |             |
+| **Student ID:**                                                                                    |    165885   |
+| **Name:**                                                                                          |  Ian Kambo  |
+| **What part of the lab did you personally contribute to,** <br>**and what did you learn from it?** | https://github.com/BI-course/tsf-202604-b2/tree/member4-nb4-steps5-9
+
+I built and evaluated the machine learning models for ExxonMobil (XOM) in Notebook 4, Steps 5–9 and 13. I tuned Ridge regression and gradient boosting using only the first 1,000 trading days, with an inner walk-forward, so the test period was never used to choose settings. Ridge's error kept falling as the penalty grew, and the largest value tried, alpha = 100,000, was chosen. I then ran the walk-forward test and built the main result table (data/metrics_main.csv), which puts the naive forecast, ARMAX, Ridge and gradient boosting side by side on the same test days, with a Diebold-Mariano p-value for each.Ridge was the best model, with an RMSE of $1.5806 against $1.5811 for naive, but the difference was not significant (DM p = 0.668).
+ARMAX was also not significant (p = 0.580).
+Gradient boosting was significantly worse than naive (p = 0.036).|
 
 **Member 5**
 

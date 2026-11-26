@@ -71,12 +71,12 @@
 
 ## Our Stock, Data and Results
 
-| **Key**                    | **Value** |
-|:---------------------------|:----------|
-| **Stock:**                 | ExxonMobil (XOM) |
+| **Key**                    | **Value**                                                                                 |
+|:---------------------------|:------------------------------------------------------------------------------------------|
+| **Stock:**                 | ExxonMobil (XOM)                                                                          |
 | **Data:**                  | Daily prices from Yahoo Finance, 2 Jan 2015 to 9 Nov 2026 (`SNAPSHOT_END = "2026-11-10"`) |
-| **Date of download:**      | [MARIAM: the date you ran `download_data.py --target XOM`] |
-| **Power BI report:**       | `outputs/XOM_dashboard.pbix` |
+| **Date of download:**      | 18 November 2026                                                                          |
+| **Power BI report:**       | `outputs/XOM_dashboard.pbix`                                                              |
 
 ## Written Verdict
 
@@ -87,6 +87,31 @@
 **How much to trust the 63-day forecast.** The model puts XOM at $188.86 on 4 Feb 2027 (up 15% from $163.70), with an 80% range of $151.95 to $209.57. That range is $57.61 wide, about 35% of today's price. Treat the central line with caution: at the 63-day horizon the model's error ($13.08) was larger than naive's ($11.83), with R² of –0.26 and DM p = 0.11. Its expected rise is therefore not supported by evidence. The range is also too narrow. The next-day 80% range contained the actual price 75.1% of the time (73.6% on high-VIX days), and at 63 days only 59.0%. In practice the realistic range is wider than shown. A trading test agrees: buy and hold earned 17.2% a year, while trading long/short on gradient boosting (the better of the two back-tested models) earned 7.4% before costs and –4.3% after 10 bp costs. Ridge lost money even before costs. [STEPHANIE: one sentence on whether any neural network beat naive on XOM, with RMSE and DM p-value.]
 
 **For the client:** we cannot forecast XOM's daily moves better than "no change". The useful output is the range, which shows how far the price could move, and even that should be read as a minimum.
+
+
+## Notebook Exercises
+
+### Notebook 1: Market Data and Candlesticks (Member 1)
+
+1. **Most worrying line:** `non_positive_prices`. We take logs of prices to get returns, and you can't take the log of zero or a negative number. For XOM it is 0.
+2. **What's missing:** timing. The 0.7 is a same-day correlation, but to forecast tomorrow we only know today's S&P 500. Same-day correlation doesn't mean it predicts the next day.
+3. **Volume in a sharp fall (2020):** volume jumped to several times its normal level. Investors panic-sell, and some are forced to sell to cover losses.
+4. **+50% then −50%:** simple return 1.5 × 0.5 = 0.75, so **−25%**. Log return ln(1.5) + ln(0.5) = **−0.288**.
+5. **Risk decision:** real returns have more extreme days than the normal curve shows. Using the normal curve for Value-at-Risk would underestimate big losses, so too little money would be kept aside.
+
+### Notebook 2: Stationarity and Returns (Member 1)
+
+1. **ADF results:** the price's large p-value (0.996) means it wanders with no fixed level, so we can't forecast it directly. The log return's tiny p-value (0.000) means it moves around a stable mean, so it can be modelled and forecast.
+
+2. **What the log did:** it didn't make the price stationary (ADF p = 0.950), but it made price moves proportional to the price level, so the spread no longer grows as the price rises. It also makes returns add up over time.
+
+3. **n_steps 100 vs 5000:** with 100 steps, 79% of level regressions looked "significant"; with 5000, 96% did (1000 gave 92%). Changes stayed at about 6%, close to chance. More data makes spurious regression worse, not better. The fix is to use changes, not more data.
+
+4. **Another predictor (S&P 500 vs gold):** the levels regression looks equally impressive for both (R² ≈ 0.56), yet gold has almost no daily link with XOM (changes R² = 0.0004, p = 0.30), while the S&P 500 does (changes R² = 0.24, p ≈ 0). So the levels R² tells us nothing; only changes show the real link.
+
+5. **Where the log return sits:** with the stationary series. In Step 3 its rolling mean stays flat at about zero. Its rolling spread changes (about 0.01 normally, up to 0.05 in 2020) but has no trend, so it is stationary in its mean, with calm and stormy periods.
+
+6. **GARCH normal vs Student-t:** with normal errors, alpha rises (0.069 → 0.079) and beta falls (0.930 → 0.918), but volatility stays very persistent. Student-t fits better: its log-likelihood is about 48.5 higher (−5351 vs −5400). Its nu of 7.2 shows XOM's returns have fat tails, so extreme days happen more often than a normal distribution allows.
 
 ---
 

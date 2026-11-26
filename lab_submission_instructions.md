@@ -62,9 +62,9 @@
 
 | **Details**                                                                                        | **Comment** |
 |:---------------------------------------------------------------------------------------------------|:------------|
-| **Student ID:**                                                                                    |             |
-| **Name:**                                                                                          |             |
-| **What part of the lab did you personally contribute to,** <br>**and what did you learn from it?** |             |
+| **Student ID:**                                                                                    | 169531            |
+| **Name:**                                                                                          | Amiir Ibrahim    |
+| **What part of the lab did you personally contribute to,** <br>**and what did you learn from it?** | https://github.com/BI-course/tsf-202604-b2/tree/member7-reporting and https://github.com/BI-course/tsf-202604-b2/tree/member7-dashboard I found that no forecasting model accurately predicts XOM’s daily closing price better than simply assuming no change. Although buy-and-hold performed best, the trading models failed to generate consistent profits, and the forecast range was slightly too narrow, capturing actual prices only 75% of the time instead of the expected 80%. My conclusion is that the forecast range is more useful than the predicted price, but it should be treated as a minimum estimate of potential price movements.            |
 
 ---
 

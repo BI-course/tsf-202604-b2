@@ -35,13 +35,9 @@
 
 | **Details**                                                                                        | **Comment** |
 |:---------------------------------------------------------------------------------------------------|:------------|
-| **Student ID:**                                                                                    |    165885   |
-| **Name:**                                                                                          |  Ian Kambo  |
-| **What part of the lab did you personally contribute to,** <br>**and what did you learn from it?** | https://github.com/BI-course/tsf-202604-b2/tree/member4-nb4-steps5-9
-
-I built and evaluated the machine learning models for ExxonMobil (XOM) in Notebook 4, Steps 5–9 and 13. I tuned Ridge regression and gradient boosting using only the first 1,000 trading days, with an inner walk-forward, so the test period was never used to choose settings. Ridge's error kept falling as the penalty grew, and the largest value tried, alpha = 100,000, was chosen. I then ran the walk-forward test and built the main result table (data/metrics_main.csv), which puts the naive forecast, ARMAX, Ridge and gradient boosting side by side on the same test days, with a Diebold-Mariano p-value for each.Ridge was the best model, with an RMSE of $1.5806 against $1.5811 for naive, but the difference was not significant (DM p = 0.668).
-ARMAX was also not significant (p = 0.580).
-Gradient boosting was significantly worse than naive (p = 0.036).|
+| **Student ID:**                                                                                    | 165885 |
+| **Name:**                                                                                          | Ian Kambo |
+| **What part of the lab did you personally contribute to,** <br>**and what did you learn from it?** | https://github.com/BI-course/tsf-202604-b2/tree/member4-nb4-steps5-9 <br><br> I built and evaluated the machine learning models for ExxonMobil (XOM) in Notebook 4, Steps 5–9 and 13. I tuned Ridge regression and gradient boosting using only the first 1,000 trading days, with an inner walk-forward, so the test period was never used to choose settings. Ridge's error kept falling as the penalty grew, and the largest value tried, alpha = 100,000, was chosen. I then ran the walk-forward test and built the main result table (`data/metrics_main.csv`), which puts the naive forecast, ARMAX, Ridge and gradient boosting side by side on the same test days, with a Diebold-Mariano p-value for each. <br><br> Ridge was the best model, with an RMSE of $1.5806 against $1.5811 for naive, but the difference was not significant (DM p = 0.668). ARMAX was also not significant (p = 0.580). Gradient boosting was significantly worse than naive (p = 0.036). <br><br> **What I learned:** tuning must use only data before the test period, otherwise the results are too optimistic. When Ridge picks a very strong penalty, it means the predictors carry almost no signal, so the model ends up close to "no change". A slightly lower RMSE is not a real improvement unless the Diebold-Mariano test shows it is significant, and for daily stock returns the naive forecast is very hard to beat. |
 
 **Member 5**
 
@@ -51,16 +47,13 @@ Gradient boosting was significantly worse than naive (p = 0.036).|
 | **Name:**                                                                                          |    Lisa Mburu         |
 | **What part of the lab did you personally contribute to,** <br>**and what did you learn from it?** | Multi-Horizon Forecasting & Baseline Exports (Notebook 7, Steps 1–6): Ran the multi-horizon forecasting pipeline on ExxonMobil (XOM) across 1-, 5-, 21-, and 63-day horizons using leak-free walk-forward splits (gap=horizon to prevent overlapping target label leakage). Added Diebold-Mariano tests against the naive baseline across horizons, analyzed forecast skill decay as horizon length increases and effective independent sample size shrinks, and documented how the 10–90% prediction interval widens over the 63-day path. Exported and verified data/forecast_basic.csv (63 future business days with date, forecast, lower, and upper on XOM price levels) and data/forecast_backtest.csv (achieving 75.1% 1-day empirical coverage against the 80.0% target) for downstream modeling and Power BI reporting. Prediction Interval Calibration & Volatility Regimes (Notebook 4, Step 10): Implemented walk-forward quantile regression (q = 0.10 and q = 0.90) on XOM returns (runtime: 37.6s), achieving 74.3% empirical coverage against the 80.0% nominal target (a -5.7 percentage point shortfall) with an average interval width of 0.0399 (3.99%). Splitting the test window by median VIX_level (2.9145) showed 75.1% coverage on calm days versus 73.6% coverage on stormy days, reflecting volatility clustering and sharper tail swings during high-volatility regimes.   |
 
-
-
-
 **Member 6**
 
 | **Details**                                                                                        | **Comment** |
 |:---------------------------------------------------------------------------------------------------|:------------|
-| **Student ID:**                                                                                    |             |
-| **Name:**                                                                                          |             |
-| **What part of the lab did you personally contribute to,** <br>**and what did you learn from it?** |             |
+| **Student ID:**                                                                                    | 166534 |
+| **Name:**                                                                                          | Stephanie Ochoka |
+| **What part of the lab did you personally contribute to,** <br>**and what did you learn from it?** | https://github.com/BI-course/tsf-202604-b2/tree/member6-neural-networks <br><br> I trained and evaluated the neural networks for ExxonMobil (XOM) in Notebook 6: MLP, LSTM, GRU, CNN and Transformer, each tested walk-forward with the scaler fitted on the training block only, the last 15% of each training block used for validation, early stopping and a fixed seed. I compared each network's validation loss with the zero-forecast (predict no change) loss, tuned the GRU's window, units and dropout on validation data only, and trained with several seeds to check stability. I also built `data/forecast_advanced.csv` with the forecasts of every model and network configuration.  <br><br> **What I learned:** neural networks need the same honest testing as simpler models, and on noisy daily stock returns they mostly learn to predict close to zero. Comparing against the zero-forecast loss shows quickly whether a network learned anything, and different seeds can give different answers, so a single run cannot be trusted. |
 
 **Member 7**
 
@@ -79,15 +72,15 @@ Gradient boosting was significantly worse than naive (p = 0.036).|
 | **Stock:**                 | ExxonMobil (XOM)                                                                          |
 | **Data:**                  | Daily prices from Yahoo Finance, 2 Jan 2015 to 9 Nov 2026 (`SNAPSHOT_END = "2026-11-10"`) |
 | **Date of download:**      | 18 November 2026                                                                          |
-| **Power BI report:**       | `outputs/XOM_dashboard.pbix`                                                              |
+| **Power BI report:**       | `outputs/XOM_dashboard.pbix`    https://github.com/BI-course/tsf-202604-b2/tree/main/outputs                                                          |
 
 ## Written Verdict
 
 **Does the model beat the naive forecast? No.** Over 1,781 test days (9 Oct 2019 to 9 Nov 2026), our best model, Ridge regression, missed the next day's closing price by $1.5806 on average (RMSE). The naive forecast "tomorrow equals today" missed by $1.5811. That gap is 0.03%. The Diebold-Mariano test gives p = 0.67, so Ridge is **not significantly** better than naive. ARMAX ($1.5920, p = 0.58) is not significantly different either. Gradient boosting ($1.5884, p = 0.036) is **significantly worse**. Ridge called the direction right on 52.2% of days, but XOM simply rose on 51.9% of them, so this is no real skill. Tuning chose a very strong penalty (alpha = 100,000), which shrinks Ridge's forecast almost to zero change, so it ends up behaving like the naive forecast. For daily returns of a large stock, this is the expected and honest result.
 
-**How we know the test was fair.** [VICTOR: paste your "How we kept the test honest" paragraph here, shortened to about 80 words. Draft from the notebooks for you to confirm: Every model was tested walk-forward. It trained on the first 1,000 days, forecast the next 63, then moved forward (29 folds), so it never saw the days it was scored on. Nothing was shuffled. Scalers and tuning used only training data, and Ridge was tuned on the first 1,000 days only. Market predictors were lagged one day. `check_no_lookahead` passed on all 48 features, including our added `volume_ratio_10_60`. When we planted a deliberately leaky feature, R² jumped from –0.05 to 0.80, and the check caught it.]
+**How we know the test was fair.** **How we know the test was fair.** Every model was tested walk-forward: it trained on the first 1,000 days, forecast the next 63, then moved forward (29 folds), so it never saw the days it was scored on. Nothing was shuffled. Scalers and tuning used only training data, and Ridge was tuned on the first 1,000 days only. Market predictors were lagged one day. `check_no_lookahead` passed on all 48 features, including our added `volume_ratio_10_60`. When we planted a deliberately leaky feature, R² jumped from –0.05 to 0.80, and the check caught it.
 
-**How much to trust the 63-day forecast.** The model puts XOM at $188.86 on 4 Feb 2027 (up 15% from $163.70), with an 80% range of $151.95 to $209.57. That range is $57.61 wide, about 35% of today's price. Treat the central line with caution: at the 63-day horizon the model's error ($13.08) was larger than naive's ($11.83), with R² of –0.26 and DM p = 0.11. Its expected rise is therefore not supported by evidence. The range is also too narrow. The next-day 80% range contained the actual price 75.1% of the time (73.6% on high-VIX days), and at 63 days only 59.0%. In practice the realistic range is wider than shown. A trading test agrees: buy and hold earned 17.2% a year, while trading long/short on gradient boosting (the better of the two back-tested models) earned 7.4% before costs and –4.3% after 10 bp costs. Ridge lost money even before costs. [STEPHANIE: one sentence on whether any neural network beat naive on XOM, with RMSE and DM p-value.]
+**How much to trust the 63-day forecast.** The model puts XOM at $188.86 on 4 Feb 2027 (up 15% from $163.70), with an 80% range of $151.95 to $209.57. That range is $57.61 wide, about 35% of today's price. Treat the central line with caution: at the 63-day horizon the model's error ($13.08) was larger than naive's ($11.83), with R² of –0.26 and DM p = 0.11. Its expected rise is therefore not supported by evidence. The range is also too narrow. The next-day 80% range contained the actual price 75.1% of the time (73.6% on high-VIX days), and at 63 days only 59.0%. In practice the realistic range is wider than shown. A trading test agrees: buy and hold earned 17.2% a year, while trading long/short on gradient boosting (the better of the two back-tested models) earned 7.4% before costs and –4.3% after 10 bp costs. Ridge lost money even before costs. 
 
 **For the client:** we cannot forecast XOM's daily moves better than "no change". The useful output is the range, which shows how far the price could move, and even that should be read as a minimum.
 
@@ -248,7 +241,7 @@ For all three tiers, submit the link to a short video (not more than 4 minutes) 
 
 | **Key**                | **Value** |
 |:-----------------------|:----------|
-| **Link to the video:** | [VIDEO LINK: must open without a login] |
+| **Link to the video:** | https://drive.google.com/drive/folders/1OK181kp8ZLge9axNlcJtCTuz6xh1mzqk?usp=sharing          |
 
 ---
 

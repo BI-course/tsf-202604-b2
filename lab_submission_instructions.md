@@ -71,12 +71,12 @@
 
 ## Our Stock, Data and Results
 
-| **Key**                    | **Value** |
-|:---------------------------|:----------|
-| **Stock:**                 | ExxonMobil (XOM) |
+| **Key**                    | **Value**                                                                                 |
+|:---------------------------|:------------------------------------------------------------------------------------------|
+| **Stock:**                 | ExxonMobil (XOM)                                                                          |
 | **Data:**                  | Daily prices from Yahoo Finance, 2 Jan 2015 to 9 Nov 2026 (`SNAPSHOT_END = "2026-11-10"`) |
-| **Date of download:**      | [MARIAM: the date you ran `download_data.py --target XOM`] |
-| **Power BI report:**       | `outputs/XOM_dashboard.pbix` |
+| **Date of download:**      | 18 November 2026                                                                          |
+| **Power BI report:**       | `outputs/XOM_dashboard.pbix`                                                              |
 
 ## Written Verdict
 
@@ -88,6 +88,16 @@
 
 **For the client:** we cannot forecast XOM's daily moves better than "no change". The useful output is the range, which shows how far the price could move, and even that should be read as a minimum.
 
+
+## Notebook Exercises
+
+### Notebook 1: Market Data and Candlesticks (Member 1)
+
+1. **Most worrying line:** `non_positive_prices`. We take logs of prices to get returns, and you can't take the log of zero or a negative number. For XOM it is 0.
+2. **What's missing:** timing. The 0.7 is a same-day correlation, but to forecast tomorrow we only know today's S&P 500. Same-day correlation doesn't mean it predicts the next day.
+3. **Volume in a sharp fall (2020):** volume jumped to several times its normal level. Investors panic-sell, and some are forced to sell to cover losses.
+4. **+50% then −50%:** simple return 1.5 × 0.5 = 0.75, so **−25%**. Log return ln(1.5) + ln(0.5) = **−0.288**.
+5. **Risk decision:** real returns have more extreme days than the normal curve shows. Using the normal curve for Value-at-Risk would underestimate big losses, so too little money would be kept aside.
 ---
 
 ## Scenario

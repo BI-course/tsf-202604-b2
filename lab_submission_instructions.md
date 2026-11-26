@@ -19,9 +19,9 @@
 
 | **Details**                                                                                        | **Comment** |
 |:---------------------------------------------------------------------------------------------------|:------------|
-| **Student ID:**                                                                                    |             |
-| **Name:**                                                                                          |             |
-| **What part of the lab did you personally contribute to,** <br>**and what did you learn from it?** |             |
+| **Student ID:**                                                                                    | 166110            |
+| **Name:**                                                                                          | Victor Macharia            |
+| **What part of the lab did you personally contribute to,** <br>**and what did you learn from it?** | https://github.com/BI-course/tsf-202604-b2/tree/member2-nb4-steps1-4 I tested whether forecasting models could predict ExxonMobil’s (XOM) closing prices better than simply assuming tomorrow’s price will remain the same as today’s. Using 2,981 trading days of historical data, I found that Ridge performed only 0.03% better than the naive model, a difference that was not statistically significant. Gradient boosting performed worse, and our testing confirmed that there was no data leakage. My conclusion is that none of the models reliably outperformed the simple “no change” forecast.           |
 
 **Member 3**
 

@@ -4,7 +4,7 @@
 
 ## Student Details
 
-**Name of the team on GitHub Classroom:** [TEAM NAME]
+**Name of the team on GitHub Classroom:** 202604-B2
 
 **Team Member Contributions:**
 
@@ -12,10 +12,9 @@
 
 | **Details**                                                                                        | **Comment** |
 |:---------------------------------------------------------------------------------------------------|:------------|
-| **Student ID:**                                                                                    |             |
-| **Name:**                                                                                          |             |
-| **What part of the lab did you personally contribute to,** <br>**and what did you learn from it?** |             |
-
+| **Student ID:**                                                                                    | 147398 |
+| **Name:**                                                                                          | Mariam Abdi |
+| **What part of the lab did you personally contribute to,** <br>**and what did you learn from it?** | https://github.com/BI-course/tsf-202604-b2/tree/member1-xom-data, https://github.com/BI-course/tsf-202604-b2/tree/member1-nb1-nb2 and https://github.com/BI-course/tsf-202604-b2/tree/member1-nb7-intermediate <br><br> **Contribution:** I chose ExxonMobil (XOM) with the group, downloaded the data on 18 Nov 2026 and set it up for all notebooks. I checked the data quality (2,981 clean trading days, 6 real moves over 10% around March 2020), described the price history and candlestick chart, and explained why each predictor matters for an oil company (Brent had the strongest daily correlation, 0.53). In Notebook 2 I ran the ADF and KPSS tests (price non-stationary, log return stationary), the spurious regression experiments and the GARCH model. I also built `forecast_intermediate.csv` in Notebook 7 (naive, ARIMA, Ridge and gradient boosting 63-day forecasts with the 10–90% range) and set up the team's GitHub repository. <br><br> **What I learned:** stock prices are non-stationary, so we must forecast returns, not prices. Regressing one trending series on another can look "significant" even when they are unrelated, and more data makes this worse. The size of returns is predictable (volatility clusters, alpha + beta ≈ 0.999 in GARCH), but their direction mostly is not. Returns also have fat tails, so a normal distribution underestimates extreme days. |
 **Member 2**
 
 | **Details**                                                                                        | **Comment** |

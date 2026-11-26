@@ -98,6 +98,21 @@
 3. **Volume in a sharp fall (2020):** volume jumped to several times its normal level. Investors panic-sell, and some are forced to sell to cover losses.
 4. **+50% then −50%:** simple return 1.5 × 0.5 = 0.75, so **−25%**. Log return ln(1.5) + ln(0.5) = **−0.288**.
 5. **Risk decision:** real returns have more extreme days than the normal curve shows. Using the normal curve for Value-at-Risk would underestimate big losses, so too little money would be kept aside.
+
+### Notebook 2: Stationarity and Returns (Member 1)
+
+1. **ADF results:** the price's large p-value (0.996) means it wanders with no fixed level, so we can't forecast it directly. The log return's tiny p-value (0.000) means it moves around a stable mean, so it can be modelled and forecast.
+
+2. **What the log did:** it didn't make the price stationary (ADF p = 0.950), but it made price moves proportional to the price level, so the spread no longer grows as the price rises. It also makes returns add up over time.
+
+3. **n_steps 100 vs 5000:** with 100 steps, 79% of level regressions looked "significant"; with 5000, 96% did (1000 gave 92%). Changes stayed at about 6%, close to chance. More data makes spurious regression worse, not better. The fix is to use changes, not more data.
+
+4. **Another predictor (S&P 500 vs gold):** the levels regression looks equally impressive for both (R² ≈ 0.56), yet gold has almost no daily link with XOM (changes R² = 0.0004, p = 0.30), while the S&P 500 does (changes R² = 0.24, p ≈ 0). So the levels R² tells us nothing; only changes show the real link.
+
+5. **Where the log return sits:** with the stationary series. In Step 3 its rolling mean stays flat at about zero. Its rolling spread changes (about 0.01 normally, up to 0.05 in 2020) but has no trend, so it is stationary in its mean, with calm and stormy periods.
+
+6. **GARCH normal vs Student-t:** with normal errors, alpha rises (0.069 → 0.079) and beta falls (0.930 → 0.918), but volatility stays very persistent. Student-t fits better: its log-likelihood is about 48.5 higher (−5351 vs −5400). Its nu of 7.2 shows XOM's returns have fat tails, so extreme days happen more often than a normal distribution allows.
+
 ---
 
 ## Scenario
